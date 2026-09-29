@@ -5,7 +5,8 @@ import {
   RESOURCE_FLAG,
   RESOURCE_WEIGHT_FLAG,
   setResourceDie,
-  setResourceWeightMap
+  setResourceWeightMap,
+  transferResourceItem
 } from "../scripts/resource-service.js";
 
 function fakeGear({ die = 8, weight = "light", weightMap } = {}) {
@@ -66,4 +67,80 @@ test("saving an effective default weight map is a no-op when nothing changes", a
     12: "regular"
   });
   assert.equal(item.updates.length, 0);
+});
+
+
+function fakeTransferItem(quantity = 1) {
+  const items = new Map();
+  const actor = {
+    documentName: "Actor",
+    items
+  };
+  const item = {
+    id: "resource-item",
+    uuid: "Actor.test.Item.resource-item",
+    parent: actor,
+    system: { quantity }
+  };
+  items.set(item.id, item);
+  return { actor, item };
+}
+
+async function withFakeItemPiles(giveItem, callback) {
+  const previousGame = globalThis.game;
+  globalThis.game = {
+    modules: {
+      get(id) {
+        assert.equal(id, "item-piles");
+        return { active: true };
+      }
+    },
+    itempiles: {
+      API: { giveItem }
+    }
+  };
+
+  try {
+    return await callback();
+  } finally {
+    if (previousGame === undefined) delete globalThis.game;
+    else globalThis.game = previousGame;
+  }
+}
+
+test("whole-item transfer reports cancellation when the source item is unchanged", async () => {
+  const { item } = fakeTransferItem(3);
+
+  const transferred = await withFakeItemPiles(
+    async () => {},
+    () => transferResourceItem(item)
+  );
+
+  assert.equal(transferred, false);
+});
+
+test("whole-item transfer reports success when part of a stack is transferred", async () => {
+  const { item } = fakeTransferItem(3);
+
+  const transferred = await withFakeItemPiles(
+    async (sourceItem) => {
+      sourceItem.system.quantity = 1;
+    },
+    () => transferResourceItem(item)
+  );
+
+  assert.equal(transferred, true);
+});
+
+test("whole-item transfer reports success when the source item is removed", async () => {
+  const { actor, item } = fakeTransferItem(1);
+
+  const transferred = await withFakeItemPiles(
+    async (sourceItem) => {
+      actor.items.delete(sourceItem.id);
+    },
+    () => transferResourceItem(item)
+  );
+
+  assert.equal(transferred, true);
 });
