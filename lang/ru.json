@@ -1,0 +1,48 @@
+{
+  "fbl-resource-dice": {
+    "ItemSheet": {
+      "Resource": "Ресурс",
+      "Standard": "Стандарт",
+      "Special": "Особый"
+    },
+    "Actions": {
+      "Use": "Использовать ресурс",
+      "UseDie": "Использовать ресурс (d{die})",
+      "Split": "Разделить ресурс",
+      "ConfigureWeight": "Настроить вес ресурса"
+    },
+    "Chat": {
+      "Rolling": "Бросок ресурса: d{die}",
+      "Unchanged": "Ресурс остаётся d{die}.",
+      "SteppedDown": "Ресурс: d{from} → d{to}.",
+      "Depleted": "Ресурс исчерпан."
+    },
+    "Dialog": {
+      "SplitTitle": "Разделить ресурс: {name}",
+      "SplitPrompt": "Выберите, как разделить d{die}.",
+      "SplitOption": "d{keep} + d{split}",
+      "TransferTitle": "Передать ресурс: {name}",
+      "TransferPrompt": "Выберите, какую часть d{die} передать.",
+      "TransferWhole": "Передать весь d{die}",
+      "TransferPart": "Передать d{split}, оставить d{keep}"
+    },
+    "WeightDialog": {
+      "Title": "Вес ресурса: {name}",
+      "Help": "Выберите вес предмета для каждой ступени ресурса. При уменьшении, ручной смене или разделении ресурса вес изменяется автоматически.",
+      "Keep": "Не менять вес",
+      "Defaults": "По умолчанию",
+      "Save": "Сохранить",
+      "Cancel": "Отмена"
+    },
+    "Notifications": {
+      "ActorOnly": "Кубик ресурса можно использовать только у предмета в инвентаре Actor.",
+      "CannotModify": "У вас нет прав на изменение этого предмета.",
+      "ItemPilesMissing": "API передачи Item Piles недоступен.",
+      "SaveFailed": "Не удалось сохранить кубик ресурса.",
+      "RollFailed": "Не удалось бросить кубик ресурса.",
+      "TransferFailed": "Не удалось передать ресурс.",
+      "ActionFailed": "Не удалось выполнить действие с ресурсом.",
+      "ChatFailed": "Ресурс обновлён, но сообщение в чат создать не удалось."
+    }
+  }
+}
