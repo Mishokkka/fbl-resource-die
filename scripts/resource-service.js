@@ -216,8 +216,12 @@ export async function transferResourceItem(item, splitOption = null) {
     }
 
     if (!splitOption) {
+      const sourceActor = item.parent;
+      const sourceQuantity = Number(item.system?.quantity ?? 1);
       await api.giveItem(item);
-      return true;
+      const sourceItem = sourceActor?.items?.get?.(item.id);
+      return !sourceItem
+        || Number(sourceItem.system?.quantity ?? 1) < sourceQuantity;
     }
 
     const actor = item.parent;
