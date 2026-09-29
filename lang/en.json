@@ -1,0 +1,48 @@
+{
+  "fbl-resource-dice": {
+    "ItemSheet": {
+      "Resource": "Resource",
+      "Standard": "Standard",
+      "Special": "Special"
+    },
+    "Actions": {
+      "Use": "Use resource",
+      "UseDie": "Use resource (d{die})",
+      "Split": "Split resource",
+      "ConfigureWeight": "Configure resource weight"
+    },
+    "Chat": {
+      "Rolling": "Resource roll: d{die}",
+      "Unchanged": "Resource remains d{die}.",
+      "SteppedDown": "Resource: d{from} → d{to}.",
+      "Depleted": "Resource depleted."
+    },
+    "Dialog": {
+      "SplitTitle": "Split resource: {name}",
+      "SplitPrompt": "Choose how to split d{die}.",
+      "SplitOption": "d{keep} + d{split}",
+      "TransferTitle": "Transfer resource: {name}",
+      "TransferPrompt": "Choose how much of d{die} to transfer.",
+      "TransferWhole": "Transfer whole d{die}",
+      "TransferPart": "Transfer d{split}, keep d{keep}"
+    },
+    "WeightDialog": {
+      "Title": "Resource weight: {name}",
+      "Help": "Choose the item weight used at each resource die. Weight updates automatically when the resource changes or is split.",
+      "Keep": "Do not change weight",
+      "Defaults": "Defaults",
+      "Save": "Save",
+      "Cancel": "Cancel"
+    },
+    "Notifications": {
+      "ActorOnly": "Resource dice can only be used from an item in an Actor inventory.",
+      "CannotModify": "You cannot modify this item.",
+      "ItemPilesMissing": "Item Piles give-item API is unavailable.",
+      "SaveFailed": "Could not save resource die.",
+      "RollFailed": "Resource roll failed.",
+      "TransferFailed": "Resource transfer failed.",
+      "ActionFailed": "Resource action failed.",
+      "ChatFailed": "Resource was updated, but the chat message could not be created."
+    }
+  }
+}
